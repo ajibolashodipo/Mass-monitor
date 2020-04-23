@@ -1,0 +1,51 @@
+<%- include ("./partials/header")%>
+<section id="ourGraph">
+  <h1>Welcome user</h1>
+  <div class="container">
+    <canvas id="myChart"></canvas>
+  </div>
+
+  <script>
+      let weightArray=[]
+      let dateArray=[]
+
+      let shod = <%-JSON.stringify(foundWeight)%>;
+       for (let item of shod) {
+        weightArray.push(item.weight)
+        dateArray.push(item.userDate)
+         //console.log(item)
+       }
+
+       console.log(weightArray,dateArray)
+    ////////
+    let myChart = document.getElementById('myChart').getContext('2d');
+    let chart = new Chart(myChart, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: dateArray,
+            datasets: [{
+                label: 'My First dataset',
+                backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: weightArray
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+  </script>
+</section>
+
+<form method="GET" action="/user/dashboard/new">
+  <button>Create new record</button>
+</form>
+
+<section id="weight-cards">
+  
+</section>
+
+<%- include ("./partials/footer")%>
