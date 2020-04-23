@@ -1,0 +1,28 @@
+<%- include ("./partials/header")%>
+
+<form action="/user/dashboard/<%=updateData._id%>?_method=PUT" method="POST">
+  <input
+    type="Date"
+    placeholder="Enter date"
+    name="date"
+    value="<%=updateData.userDate%>"
+    required
+  />
+  <input
+    type="Time"
+    placeholder="Enter time"
+    name="time"
+    value="<%=updateData.time%>"
+    required
+  />
+  <input
+    type="Number"
+    placeholder="Enter weight"
+    name="weight"
+    value="<%=updateData.weight%>"
+    required
+  />
+
+  <button>Submit</button>
+</form>
+<%- include ("./partials/footer")%>

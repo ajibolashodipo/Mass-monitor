@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const methodOverride = require("method-override");
 const ejs = require("ejs");
 const Weight = require("./models/weights");
 const User = require("./models/users");
@@ -28,6 +29,9 @@ mongoose
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({ extended: false }));
+
+//method override
+app.use(methodOverride("_method"));
 
 //route middleware
 app.use("/", indexRoute);

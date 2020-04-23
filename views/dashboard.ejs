@@ -40,12 +40,56 @@
   </script>
 </section>
 
-<form method="GET" action="/user/dashboard/new">
-  <button>Create new record</button>
-</form>
+<section id="create-record">
+  <form method="GET" action="/user/dashboard/new">
+    <button>Create new record</button>
+  </form>
+</section>
+<br />
+<br />
 
 <section id="weight-cards">
-  
+  <div class="container">
+    <div class="card-columns">
+      <%foundWeight.forEach(mass => { %>
+      <li style="list-style-type: none;">
+        <div
+          class="card text-white mb-3"
+          style="width: 18rem; background-color: coral; text-align: center;"
+        >
+          <div class="card-body">
+            <h4 class="card-title"><%=mass.weight%> kg</h4>
+            <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+            <p>Date: <%=mass.userDate%></p>
+            <p>Time: <%=mass.time%></p>
+            <p>BMI: <%=mass.time%></p>
+
+            <div class="row justify-content-center edit-and-delete">
+              <div class="col-12">
+                <form action="/user/dashboard/<%=mass._id%>/edit" method="GET">
+                  <button type="submit" class="btn btn-warning">
+                    Edit
+                  </button>
+                </form>
+              </div>
+              <div class="col-12">
+                <form
+                  action="/user/dashboard/<%=mass._id%>?_method=DELETE"
+                  method="POST"
+                >
+                  <button type="submit" class="btn btn-danger">
+                    Delete
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <%})%>;
+    </div>
+  </div>
 </section>
 
 <%- include ("./partials/footer")%>

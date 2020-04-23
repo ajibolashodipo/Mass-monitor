@@ -31,4 +31,38 @@ router.post("/dashboard/new", async (req, res) => {
   }
 });
 
+router.get("/dashboard/:id/edit", async (req, res) => {
+  let id = req.params.id;
+  try {
+    const updateData = await Weight.findOne({ _id: id });
+    // console.log(updateData);
+    res.render("edit", { updateData });
+  } catch (e) {
+    res.send("an error occurred");
+  }
+});
+
+router.put("/dashboard/:id", async (req, res) => {
+  const { date, time, weight } = req.body;
+  const formUpdate = { userDate: date, time, weight };
+
+  try {
+    const data = await Weight.findByIdAndUpdate(req.params.id, formUpdate);
+    res.redirect("/user/dashboard");
+  } catch (e) {
+    res.send("an error occurred");
+  }
+});
+
+router.delete("/dashboard/:id", async (req, res) => {
+  let id = req.params.id;
+  try {
+    const deleteWeight = await Weight.findOneAndDelete({ _id: id });
+    console.log(deleteWeight);
+    res.redirect("/user/dashboard");
+  } catch (error) {
+    res.send(error);
+  }
+});
+
 module.exports = router;
