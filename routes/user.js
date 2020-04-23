@@ -9,11 +9,11 @@ router.get("/dashboard", async (req, res) => {
     .exec();
   // res.send(foundWeight);
 
-  res.render("dashboard", { foundWeight: foundWeight });
+  res.render("user/dashboard", { foundWeight: foundWeight });
 });
 
 router.get("/dashboard/new", async (req, res) => {
-  res.render("new");
+  res.render("user/new");
 });
 router.post("/dashboard/new", async (req, res) => {
   const { date, time, weight } = req.body;
@@ -36,7 +36,7 @@ router.get("/dashboard/:id/edit", async (req, res) => {
   try {
     const updateData = await Weight.findOne({ _id: id });
     // console.log(updateData);
-    res.render("edit", { updateData });
+    res.render("user/edit", { updateData });
   } catch (e) {
     res.send("an error occurred");
   }

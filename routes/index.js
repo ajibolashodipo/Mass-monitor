@@ -27,4 +27,8 @@ router.post("/logout", async (req, res) => {
   //res.send("hello world");
 });
 
+router.get("/bmi", async (req, res) => {
+  res.render("bmi");
+});
+
 module.exports = router;
