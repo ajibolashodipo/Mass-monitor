@@ -7,7 +7,9 @@ const Weight = require("./models/weights");
 const User = require("./models/users");
 const indexRoute = require("./routes/index");
 const userRoute = require("./routes/user");
+const session = require("express-session");
 const app = express();
+require("dotenv").config();
 
 let url = "mongodb://127.0.0.1/weight_app";
 let port = 8080;
@@ -32,6 +34,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 //method override
 app.use(methodOverride("_method"));
+
+//express-session
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    // cookie: { secure: true },
+  })
+);
 
 //route middleware
 app.use("/", indexRoute);

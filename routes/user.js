@@ -2,13 +2,16 @@ const express = require("express");
 const router = express.Router();
 const Weight = require("../models/weights");
 const User = require("../models/users");
+const bcrypt = require("bcryptjs");
+const isLoggedIn = require("../middleware/isLoggedIn");
 
-router.get("/dashboard", async (req, res) => {
-  const foundWeight = await Weight.find({})
-    .sort({ userDate: 1, time: 1 })
-    .exec();
+router.get("/dashboard", isLoggedIn, async (req, res) => {
+  //let userNom= req.session.user.namedUser);
+  // const foundWeight = await Weight.find({})
+  //   .sort({ userDate: 1, time: 1 })
+  //   .exec();
 
-  const foundUser = await User.findOne({ username: "jibola" })
+  const foundUser = await User.findOne({ username: req.session.user.namedUser })
     .populate({ path: "weights", options: { sort: { userDate: 1, time: 1 } } })
     .exec();
 
@@ -16,10 +19,10 @@ router.get("/dashboard", async (req, res) => {
 });
 
 //render weight form
-router.get("/dashboard/new", async (req, res) => {
+router.get("/dashboard/new", isLoggedIn, async (req, res) => {
   res.render("user/new");
 });
-router.post("/dashboard/new", async (req, res) => {
+router.post("/dashboard/new", isLoggedIn, async (req, res) => {
   //add weight data
   const { date, time, weight, bmi } = req.body;
   //userDate comes from the mongoose schema btw
@@ -34,7 +37,8 @@ router.post("/dashboard/new", async (req, res) => {
   try {
     await myWeight.save();
     //find associated user
-    const user = await User.findOne({ username: "jibola" });
+    // let userNom= req.session.user.namedUser);
+    const user = await User.findOne({ username: req.session.user.namedUser });
     user.weights.push(myWeight);
     await user.save();
     //console.log(user);
@@ -44,7 +48,8 @@ router.post("/dashboard/new", async (req, res) => {
   }
 });
 
-router.get("/dashboard/:id/edit", async (req, res) => {
+//render update form
+router.get("/dashboard/:id/edit", isLoggedIn, async (req, res) => {
   let id = req.params.id;
   try {
     const updateData = await Weight.findOne({ _id: id });
@@ -55,7 +60,8 @@ router.get("/dashboard/:id/edit", async (req, res) => {
   }
 });
 
-router.put("/dashboard/:id", async (req, res) => {
+//update
+router.put("/dashboard/:id", isLoggedIn, async (req, res) => {
   const { date, time, weight, bmi } = req.body;
   const formUpdate = { userDate: date, time, weight, bmi };
 
@@ -67,11 +73,10 @@ router.put("/dashboard/:id", async (req, res) => {
   }
 });
 
-router.delete("/dashboard/:id", async (req, res) => {
+router.delete("/dashboard/:id", isLoggedIn, async (req, res) => {
   let id = req.params.id;
   try {
-    const deleteWeight = await Weight.findOneAndDelete({ _id: id });
-    console.log(deleteWeight);
+    await Weight.findOneAndDelete({ _id: id });
     res.redirect("/user/dashboard");
   } catch (error) {
     res.send(error);
