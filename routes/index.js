@@ -10,6 +10,23 @@ router.get("/register", async (req, res) => {
   res.render("index/register");
 });
 router.post("/register", async (req, res) => {
+  let { username, password } = req.body;
+  //check if user doesnt exist in the db
+  try {
+    const user = await User.findOne({ username: req.body.username });
+    if (user) {
+      res.redirect("/login");
+      return;
+    }
+    const userDetail = { username, password };
+    const newUser = new User(userDetail);
+
+    await newUser.save();
+    console.log("account created");
+    res.redirect("/index/login");
+  } catch (error) {
+    res.send(error);
+  }
   //res.render("hello world");
   res.redirect("index/login");
 });

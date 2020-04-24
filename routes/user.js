@@ -7,24 +7,37 @@ router.get("/dashboard", async (req, res) => {
   const foundWeight = await Weight.find({})
     .sort({ userDate: 1, time: 1 })
     .exec();
-  // res.send(foundWeight);
 
-  res.render("user/dashboard", { foundWeight: foundWeight });
+  const foundUser = await User.findOne({ username: "jibola" })
+    .populate({ path: "weights", options: { sort: { userDate: 1, time: 1 } } })
+    .exec();
+
+  res.render("user/dashboard", { foundUser: foundUser });
 });
 
+//render weight form
 router.get("/dashboard/new", async (req, res) => {
   res.render("user/new");
 });
 router.post("/dashboard/new", async (req, res) => {
+  //add weight data
   const { date, time, weight, bmi } = req.body;
   //userDate comes from the mongoose schema btw
-
-  const formDetail = { userDate: date, time, weight, bmi };
-  // console.log(formDetail);
+  const formDetail = {
+    userDate: date,
+    time,
+    weight,
+    bmi,
+  };
   const myWeight = new Weight(formDetail);
 
   try {
     await myWeight.save();
+    //find associated user
+    const user = await User.findOne({ username: "jibola" });
+    user.weights.push(myWeight);
+    await user.save();
+    //console.log(user);
     res.redirect("/user/dashboard");
   } catch (e) {
     res.status(400).send(e);

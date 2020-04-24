@@ -70,6 +70,17 @@ body {
   margin: auto;
 }
 
+.weight-card {
+  /* border-radius: 70px; */
+  border-top-left-radius: 70px;
+  border-top-right-radius: 70px;
+  border-bottom-right-radius: 70px;
+  background-color: coral;
+  text-align: center;
+  box-shadow: 5px 7.5px #888888;
+  margin-bottom: 5%;
+  /* height: 15rem; */
+}
 /* bootstrap grid stuff */
 
 /* footer */
