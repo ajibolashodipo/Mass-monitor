@@ -105,12 +105,11 @@ router.post("/login", async (req, res) => {
   }
 });
 router.get("/logout", async (req, res) => {
-  req.session.destroy(); //Destroys the session and logs out the user
+  //Destroys the session and logs out the user
+  req.session.destroy();
   res.redirect("/login");
 });
 
-router.get("/bmi", async (req, res) => {
-  res.render("bmi");
-});
+
 
 module.exports = router;
