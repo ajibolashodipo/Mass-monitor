@@ -3,7 +3,7 @@
 <div class="all-content">
   <div class="container">
     <h3>Welcome user</h3>
-    <div class="row">
+    <div class="row col-container">
       <section id="top-graph" class="col-lg-8 col-md-6 col-12">
         <div class="rando">
           <div class="graph-container">
@@ -53,7 +53,7 @@
 
             <form id="bmi-form">
               <div class="form-group">
-                <label for="height">Height(in centimeters)</label>
+                <label for="height">Height (in centimeters)</label>
                 <input
                   type="Number"
                   class="form-control"
@@ -65,7 +65,7 @@
                 />
               </div>
               <div class="form-group">
-                <label for="weight">Weight(in kilograms)</label>
+                <label for="weight">Weight (in kilograms)</label>
                 <input
                   type="Number"
                   class="form-control"
@@ -77,7 +77,7 @@
               </div>
 
               <button id="bmi-submit" type="submit" class="btn btn-primary">
-                Submit
+                Calculate
               </button>
             </form>
 
@@ -146,7 +146,13 @@
         <li style="list-style-type: none;">
           <div
             class="card text-white mb-3"
-            style="width: 20rem; background-color: coral; text-align: center;"
+            style="
+              max-width: 18rem;
+              border-radius: 30px;
+              background-color: coral;
+              text-align: center;
+              box-shadow: 5px 7.5px #888888;
+            "
           >
             <div class="card-body">
               <h4 class="card-title"><%=mass.weight%> kg</h4>
