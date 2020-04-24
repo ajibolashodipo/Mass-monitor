@@ -16,10 +16,10 @@ router.get("/dashboard/new", async (req, res) => {
   res.render("user/new");
 });
 router.post("/dashboard/new", async (req, res) => {
-  const { date, time, weight } = req.body;
+  const { date, time, weight, bmi } = req.body;
   //userDate comes from the mongoose schema btw
 
-  const formDetail = { userDate: date, time, weight };
+  const formDetail = { userDate: date, time, weight, bmi };
   // console.log(formDetail);
   const myWeight = new Weight(formDetail);
 
@@ -43,8 +43,8 @@ router.get("/dashboard/:id/edit", async (req, res) => {
 });
 
 router.put("/dashboard/:id", async (req, res) => {
-  const { date, time, weight } = req.body;
-  const formUpdate = { userDate: date, time, weight };
+  const { date, time, weight, bmi } = req.body;
+  const formUpdate = { userDate: date, time, weight, bmi };
 
   try {
     const data = await Weight.findByIdAndUpdate(req.params.id, formUpdate);

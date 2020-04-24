@@ -4,22 +4,21 @@ const Weight = require("../models/weights");
 const User = require("../models/users");
 
 router.get("/", async (req, res) => {
-  res.render("landing");
+  res.render("index/landing");
 });
 router.get("/register", async (req, res) => {
-  res.render("register");
+  res.render("index/register");
 });
 router.post("/register", async (req, res) => {
   //res.render("hello world");
-  res.redirect("/login");
+  res.redirect("index/login");
 });
 router.get("/login", async (req, res) => {
-  res.render("login");
+  res.render("index/login");
 });
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
-  console.log(username, password);
   res.redirect("/user/dashboard");
   //res.send("hello world");
 });

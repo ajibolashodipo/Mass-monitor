@@ -1,95 +1,189 @@
 <%- include ("../partials/header")%>
-<section id="ourGraph">
-  <h1>Welcome user</h1>
+
+<div class="all-content">
   <div class="container">
-    <canvas id="myChart"></canvas>
-  </div>
+    <h3>Welcome user</h3>
+    <div class="row">
+      <section id="top-graph" class="col-lg-8 col-md-6 col-12">
+        <div class="rando">
+          <div class="graph-container">
+            <canvas id="myChart"></canvas>
+          </div>
 
-  <script>
-      let weightArray=[]
-      let dateArray=[]
+          <script>
+              let weightArray=[]
+              let dateArray=[]
 
-      let shod = <%-JSON.stringify(foundWeight)%>;
-       for (let item of shod) {
-        weightArray.push(item.weight)
-        dateArray.push(item.userDate)
-         //console.log(item)
-       }
+              let shod = <%-JSON.stringify(foundWeight)%>;
+               for (let item of shod) {
+                weightArray.push(item.weight)
+                dateArray.push(item.userDate)
+                 //console.log(item)
+               }
 
-       console.log(weightArray,dateArray)
-    ////////
-    let myChart = document.getElementById('myChart').getContext('2d');
-    let chart = new Chart(myChart, {
-        // The type of chart we want to create
-        type: 'line',
+               console.log(weightArray,dateArray)
+            ////////
+            let myChart = document.getElementById('myChart').getContext('2d');
+            let chart = new Chart(myChart, {
+                // The type of chart we want to create
+                type: 'line',
 
-        // The data for our dataset
-        data: {
-            labels: dateArray,
-            datasets: [{
-                label: 'My First dataset',
-                backgroundColor: 'rgba(0, 0, 0, 0.1)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: weightArray
-            }]
-        },
+                // The data for our dataset
+                data: {
+                    labels: dateArray,
+                    datasets: [{
+                        label: 'My First dataset',
+                        backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                        borderColor: 'rgb(255, 99, 132)',
+                        data: weightArray
+                    }]
+                },
 
-        // Configuration options go here
-        options: {}
-    });
-  </script>
-</section>
+                // Configuration options go here
+                options: {}
+            });
+          </script>
+        </div>
+      </section>
 
-<section id="create-record">
-  <form method="GET" action="/user/dashboard/new">
-    <button>Create new record</button>
-  </form>
-</section>
-<br />
-<br />
+      <section id="bmi-section" class="col-lg-4 col-md-6 col-12">
+        <div class="rando">
+          <div class="bmi-container">
+            <h3>BMI Calculator</h3>
 
-<section id="weight-cards">
-  <div class="container">
-    <div class="card-columns">
-      <%foundWeight.forEach(mass => { %>
-      <li style="list-style-type: none;">
-        <div
-          class="card text-white mb-3"
-          style="width: 18rem; background-color: coral; text-align: center;"
-        >
-          <div class="card-body">
-            <h4 class="card-title"><%=mass.weight%> kg</h4>
-            <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
-            <p>Date: <%=mass.userDate%></p>
-            <p>Time: <%=mass.time%></p>
-            <p>BMI: <%=mass.time%></p>
-
-            <div class="row justify-content-center edit-and-delete">
-              <div class="col-12">
-                <form action="/user/dashboard/<%=mass._id%>/edit" method="GET">
-                  <button type="submit" class="btn btn-warning">
-                    Edit
-                  </button>
-                </form>
+            <form id="bmi-form">
+              <div class="form-group">
+                <label for="height">Height(in centimeters)</label>
+                <input
+                  type="Number"
+                  class="form-control"
+                  id="height"
+                  name="height"
+                  aria-describedby="emailHelp"
+                  required
+                  placeholder="height"
+                />
               </div>
-              <div class="col-12">
-                <form
-                  action="/user/dashboard/<%=mass._id%>?_method=DELETE"
-                  method="POST"
-                >
-                  <button type="submit" class="btn btn-danger">
-                    Delete
-                  </button>
-                </form>
+              <div class="form-group">
+                <label for="weight">Weight(in kilograms)</label>
+                <input
+                  type="Number"
+                  class="form-control"
+                  name="weight"
+                  id="weight"
+                  placeholder="weight"
+                  required
+                />
+              </div>
+
+              <button id="bmi-submit" type="submit" class="btn btn-primary">
+                Submit
+              </button>
+            </form>
+
+            <div class="bmi-result">
+              <p id="bmi-result-text"></p>
+            </div>
+          </div>
+
+          <script>
+            let formHeight = document.getElementById("height");
+            let formWeight = document.getElementById("weight");
+            let bmiResultText = document.getElementById("bmi-result-text");
+            let bmiSubmit = document.getElementById("bmi-submit");
+
+            bmiSubmit.addEventListener("click", (e) => {
+              e.preventDefault();
+              //validation
+              if (!formHeight.value || !formWeight.value) {
+                bmiResultText.innerHTML = `Error: One or more empty input fields`;
+                return;
+              }
+              if (formHeight.value < 0 || formWeight.value < 0) {
+                bmiResultText.innerHTML = `Error: Input cannot be negative`;
+                return;
+              }
+
+              let bmiTemp =
+                (10000 * formWeight.value) /
+                (formHeight.value * formHeight.value);
+              let bmi = bmiTemp.toFixed(1);
+              console.log(bmiTemp);
+
+              if (bmiTemp < 18.5) {
+                bmiResultText.innerHTML = `Your BMI is ${bmi}. Underweight`;
+                return;
+              } else if (bmiTemp < 24.9) {
+                bmiResultText.innerHTML = `Your BMI is ${bmi}. Normal weight`;
+                return;
+              } else if (bmiTemp < 29.9) {
+                bmiResultText.innerHTML = `Your BMI is ${bmi}. Overweight`;
+                return;
+              } else {
+                bmiResultText.innerHTML = `Your BMI is ${bmi}. Obese`;
+                return;
+              }
+            });
+          </script>
+        </div>
+      </section>
+    </div>
+  </div>
+  <section id="create-record">
+    <div class="container">
+      <div class="create-record-container">
+        <form method="GET" action="/user/dashboard/new">
+          <button type="submit" class="btn btn-info">Create New Record</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section id="weight-cards">
+    <div class="container">
+      <div class="card-columns">
+        <%foundWeight.forEach(mass => { %>
+        <li style="list-style-type: none;">
+          <div
+            class="card text-white mb-3"
+            style="width: 20rem; background-color: coral; text-align: center;"
+          >
+            <div class="card-body">
+              <h4 class="card-title"><%=mass.weight%> kg</h4>
+              <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+              <p>Date: <%=mass.userDate%></p>
+              <p>Time: <%=mass.time%></p>
+              <p>BMI: <%=mass.bmi%></p>
+
+              <div class="row justify-content-center edit-and-delete">
+                <div class="col-12">
+                  <form
+                    action="/user/dashboard/<%=mass._id%>/edit"
+                    method="GET"
+                  >
+                    <button type="submit" class="btn btn-warning">
+                      Edit
+                    </button>
+                  </form>
+                </div>
+                <div class="col-12">
+                  <form
+                    action="/user/dashboard/<%=mass._id%>?_method=DELETE"
+                    method="POST"
+                  >
+                    <button type="submit" class="btn btn-danger">
+                      Delete
+                    </button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </li>
+        </li>
 
-      <%})%>;
+        <%})%>
+      </div>
     </div>
-  </div>
-</section>
-
+  </section>
+</div>
 <%- include ("../partials/footer")%>

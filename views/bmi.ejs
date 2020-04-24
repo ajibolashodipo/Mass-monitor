@@ -1,12 +1,57 @@
-<%- include ("./partials/header")%> 
+<%- include ("./partials/header")%>
+<div class="all-content">
+  <section id="bmi-section">
+    <form id="form" action="">
+      <label for="height">Height(in centimeters)</label>
+      <input
+        type="text"
+        id="height"
+        name="height"
+        placeholder="height"
+        required
+      />
+      <label for="weight">Weight(in kilograms)</label>
+      <input
+        type="text"
+        id="weight"
+        name="weight"
+        placeholder="weight"
+        required
+      />
+      <button id="bmi-submit">Submit</button>
+    </form>
+    <div class="bmi-result">
+      <p id="bmi-result-text"></p>
+    </div>
 
+    <script>
+      let formHeight = document.getElementById("height");
+      let formWeight = document.getElementById("weight");
+      let bmiResultText = document.getElementById("bmi-result-text");
+      let bmiSubmit = document.getElementById("bmi-submit");
 
+      bmiSubmit.addEventListener("click", (e) => {
+        e.preventDefault();
+        let bmiTemp =
+          (10000 * formWeight.value) / (formHeight.value * formHeight.value);
+        let bmi = bmiTemp.toFixed(1);
+        console.log(bmiTemp);
 
-
-
-
-
-
-
-
+        if (bmiTemp < 18.5) {
+          bmiResultText.innerHTML = `Your BMI is ${bmi}. Underweight`;
+          return;
+        } else if (bmiTemp < 24.9) {
+          bmiResultText.innerHTML = `Your BMI is ${bmi}. Normal weight`;
+          return;
+        } else if (bmiTemp < 29.9) {
+          bmiResultText.innerHTML = `Your BMI is ${bmi}. Overweight`;
+          return;
+        } else {
+          bmiResultText.innerHTML = `Your BMI is ${bmi}. Obese`;
+          return;
+        }
+      });
+    </script>
+  </section>
+</div>
 <%- include ("./partials/footer")%>

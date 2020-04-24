@@ -14,7 +14,7 @@ const weightSchema = new mongoose.Schema({
   },
   bmi: {
     type: Number,
-    //required: true,
+    required: true,
   },
   date: {
     type: Date,

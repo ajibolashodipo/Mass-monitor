@@ -1,0 +1,102 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  /* font-family: "Courier"; */
+  font-family: "Raleway", sans-serif;
+  /* font-family: "Cormorant Garamond", serif; */
+}
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+}
+.all-content {
+  flex: 1 0 auto;
+}
+
+.container {
+  /* max-width:1100px */
+  width: 100%;
+  overflow: hidden;
+  margin: 1.5% auto;
+  /* border: 1px solid green; */
+
+  padding: 1%;
+}
+.graph-container {
+  width: 100%;
+  border: 1px solid red;
+  margin-bottom: 4%;
+}
+
+.bmi-container {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  border: 1px solid blue;
+  padding: 5%;
+}
+
+.form-container {
+  width: 40%;
+  margin: auto;
+  border: 1px solid green;
+  padding: 2.5%;
+  border-radius: 20px;
+}
+
+.create-record-container button {
+  width: 50%;
+  padding: 1.5%;
+}
+
+.lone-center-align {
+  text-align: center !important;
+  margin: auto;
+}
+
+/* footer */
+
+#real-footer {
+  background: #373b44;
+  height: 9vh;
+  flex-shrink: 0;
+}
+.real-footer-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 9vh;
+}
+.real-footer-section h3 {
+  font-weight: 100;
+  font-size: 1.2rem;
+  color: #fff;
+  margin: 0;
+}
+.real-footer-section .fab {
+  font-size: 1.5rem;
+  color: #fff;
+}
+.real-footer-section .fab:hover {
+  color: turquoise;
+  transform: rotate(20deg);
+}
+.real-footer-section ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.real-footer-section ul li {
+  list-style: none;
+  text-decoration: none;
+  margin-right: 25%;
+}
+.real-footer-section ul li a {
+  padding: 5%;
+  align-self: center;
+  margin: auto;
+}
