@@ -100,16 +100,21 @@
                 />
               </div>
 
-              <button id="bmi-submit" type="submit" class="btn btn-primary">
+              <button
+                id="bmi-submit"
+                type="submit"
+                class="btn btn-primary"
+                style="margin-bottom: 2%;"
+              >
                 Calculate
               </button>
             </form>
 
-            
-
-            <div class="bmi-result">
-              <p id="bmi-result-text"></p>
-            </div>
+            <div
+              class="alert error-alert alert-danger"
+              style="visibility: hidden;"
+              role="alert"
+            ></div>
           </div>
 
           <script>
@@ -117,16 +122,27 @@
             let formWeight = document.getElementById("weight");
             let bmiResultText = document.getElementById("bmi-result-text");
             let bmiSubmit = document.getElementById("bmi-submit");
+            let errorAlert = document.querySelector(".error-alert");
+
+            function showAndFade(myTime) {
+              errorAlert.style.visibility = "visible";
+              setTimeout(function () {
+                errorAlert.style.visibility = "hidden";
+              }, myTime);
+              return;
+            }
 
             bmiSubmit.addEventListener("click", (e) => {
               e.preventDefault();
               //validation
               if (!formHeight.value || !formWeight.value) {
-                bmiResultText.innerHTML = `Error: One or more empty input fields`;
+                errorAlert.innerHTML = `Error: Empty input field(s)`;
+                showAndFade(2000);
                 return;
               }
               if (formHeight.value < 0 || formWeight.value < 0) {
-                bmiResultText.innerHTML = `Error: Input cannot be negative`;
+                errorAlert.innerHTML = `Error: Input cannot be negative`;
+                showAndFade(2000);
                 return;
               }
 
@@ -137,16 +153,20 @@
               console.log(bmiTemp);
 
               if (bmiTemp < 18.5) {
-                bmiResultText.innerHTML = `Your BMI is ${bmi}. Underweight`;
+                errorAlert.innerHTML = `BMI is ${bmi}. Underweight`;
+                showAndFade(5000);
                 return;
               } else if (bmiTemp < 24.9) {
-                bmiResultText.innerHTML = `Your BMI is ${bmi}. Normal weight`;
+                errorAlert.innerHTML = `BMI is ${bmi}. Normal`;
+                showAndFade(5000);
                 return;
               } else if (bmiTemp < 29.9) {
-                bmiResultText.innerHTML = `Your BMI is ${bmi}. Overweight`;
+                errorAlert.innerHTML = `BMI is ${bmi}. Overweight`;
+                showAndFade(5000);
                 return;
               } else {
-                bmiResultText.innerHTML = `Your BMI is ${bmi}. Obese`;
+                errorAlert.innerHTML = `BMI is ${bmi}. Obese`;
+                showAndFade(5000);
                 return;
               }
             });
@@ -159,7 +179,9 @@
     <div class="container">
       <div class="create-record-container">
         <form method="GET" action="/user/dashboard/new">
-          <button type="submit" class="btn btn-info">Create New Record</button>
+          <button type="submit" class="btn btn-info">
+            Add New Record
+          </button>
         </form>
       </div>
     </div>
