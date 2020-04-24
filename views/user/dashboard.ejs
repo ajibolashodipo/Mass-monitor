@@ -2,16 +2,16 @@
 
 <div class="all-content">
   <div class="container">
-    <h3>Welcome user</h3>
+    <!-- <h3>Welcome user</h3> -->
     <div class="row col-container">
-      <section id="top-graph" class="col-lg-8 col-md-6 col-12">
+      <section id="top-graph" class="col-lg-8 col-md-12 col-12">
         <div class="rando">
           <div class="graph-container">
             <canvas id="myChart"></canvas>
           </div>
 
           <script>
-              let weightArray=[]
+             let weightArray=[]
               let dateArray=[]
 
               let shod = <%-JSON.stringify(foundWeight)%>;
@@ -32,21 +32,45 @@
                 data: {
                     labels: dateArray,
                     datasets: [{
-                        label: 'My First dataset',
+                        label: 'Weight Data',
                         backgroundColor: 'rgba(0, 0, 0, 0.1)',
                         borderColor: 'rgb(255, 99, 132)',
-                        data: weightArray
+                        data: weightArray,
+                        borderWidth:3,
+
+                        hoverBorderColor:'#000'
                     }]
                 },
 
-                // Configuration options go here
-                options: {}
+                  // Configuration options go here
+                                        options: {
+                                          title: {
+                              display: true,
+                              text: "Weight Plot vs Time",
+                              fontSize: 20,
+                            },legend: {
+                      display: true,
+                      position: "right",
+                      labels: {
+                        fontColor: "#000",
+                      },
+                    },layout: {
+              padding: {
+                left: 30,
+                right: 0,
+                bottom: 30,
+                top: 0,
+              },
+            },
+                                        }
+
+
             });
           </script>
         </div>
       </section>
 
-      <section id="bmi-section" class="col-lg-4 col-md-6 col-12">
+      <section id="bmi-section" class="col-lg-4 col-md-12 col-12">
         <div class="rando">
           <div class="bmi-container">
             <h3>BMI Calculator</h3>
