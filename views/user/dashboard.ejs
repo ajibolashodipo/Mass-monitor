@@ -2,7 +2,7 @@
 
 <div class="all-content">
   <div class="container">
-    <!-- <h3>Welcome user</h3> -->
+    <%- include ("../partials/flash")%>
     <div class="row">
       <section id="top-graph" class="col-lg-8 col-md-12 col-12">
         <div class="rando">
@@ -21,7 +21,7 @@
                  //console.log(item)
                }
 
-               console.log(weightArray,dateArray)
+
             ////////
             let myChart = document.getElementById('myChart').getContext('2d');
             let chart = new Chart(myChart, {
@@ -47,7 +47,7 @@
                                           title: {
                               display: true,
                               text: "Weight Plot vs Time",
-                              fontSize: 20,
+                              fontSize: 15,
                             },legend: {
                       display: true,
                       position: "right",
@@ -150,7 +150,6 @@
                 (10000 * formWeight.value) /
                 (formHeight.value * formHeight.value);
               let bmi = bmiTemp.toFixed(1);
-              console.log(bmiTemp);
 
               if (bmiTemp < 18.5) {
                 errorAlert.innerHTML = `BMI is ${bmi}. Underweight`;

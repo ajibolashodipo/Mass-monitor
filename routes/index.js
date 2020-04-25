@@ -19,17 +19,17 @@ router.post("/register", async (req, res) => {
 
     //check for empty input fields
     if (!username || !password || !confirmPass) {
-      console.log("User fields cannot be empty");
+      req.flash("error_msg", "User fields cannot be empty");
       return res.redirect("/register");
     }
     //check for equality between password fields
     if (password !== confirmPass) {
-      console.log("Passwords do not match");
+      req.flash("error_msg", "Passwords do not match");
       return res.redirect("/register");
     }
     //check for password length
     if (password.length < 6) {
-      console.log("Password too short");
+      req.flash("error_msg", "Passwords too short");
       return res.redirect("/register");
     }
 
@@ -37,7 +37,7 @@ router.post("/register", async (req, res) => {
 
     const user = await User.findOne({ username: req.body.username });
     if (user) {
-      console.log("Account already exists");
+      req.flash("error_msg", "Account already exists");
       return res.redirect("/register");
     }
     //hash the password
@@ -49,9 +49,10 @@ router.post("/register", async (req, res) => {
     const newUser = new User(userDetail);
     await newUser.save();
 
+    req.flash("success_msg", "Sign Up Succesful. Please Login");
     res.redirect("/login");
   } catch (error) {
-    console.log(error);
+    req.flash("error_msg", "An error occurred. Try again");
     res.redirect("/register");
   }
 });
@@ -66,7 +67,7 @@ router.post("/login", async (req, res) => {
 
     //check for empty input
     if (!username || !password) {
-      console.log("User fields cannot be empty");
+      req.flash("error_msg", "Empty input fields");
       return res.redirect("/login");
     }
     //check if user exists in the db
@@ -74,42 +75,45 @@ router.post("/login", async (req, res) => {
 
     //console.log(user);
     if (!user) {
-      console.log("Username or password is wrong");
+      req.flash("error_msg", "Username or password is wrong");
       return res.redirect("/login");
     }
     //compare passwords using bcrypt
     const isPassword = await bcrypt.compare(password, user.password);
     if (!isPassword) {
-      console.log("Username or password is wrong");
+      req.flash("error_msg", "Username or password is wrong");
       return res.redirect("/login");
     }
 
     //we know at this point that the user is who they say they are
 
     //set session object
-    let namedUser = user.username;
-    let id = user._id;
-    const sess = { namedUser, id };
 
-    req.session.user = sess;
+    req.session.username = user.username;
+    req.session.id = user._id;
     req.session.isLoggedIn = true;
     await req.session.save();
 
     //console.log(req.session);
+    req.flash("success_msg", "Login Successful");
     res.redirect("/user/dashboard");
 
     //
   } catch (error) {
-    console.log(error);
+    req.flash("error_msg", "An error occurred. Try again");
     res.redirect("/login");
   }
 });
 router.get("/logout", async (req, res) => {
   //Destroys the session and logs out the user
-  req.session.destroy();
-  res.redirect("/login");
+  try {
+    // await req.session.destroy();
+    req.flash("success_msg", "Logout Successful");
+    res.redirect("/login");
+  } catch (error) {
+    req.flash("error_msg", "An error occurred. Try again");
+    res.redirect("/user/dashboard");
+  }
 });
-
-
 
 module.exports = router;

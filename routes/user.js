@@ -6,12 +6,8 @@ const bcrypt = require("bcryptjs");
 const isLoggedIn = require("../middleware/isLoggedIn");
 
 router.get("/dashboard", isLoggedIn, async (req, res) => {
-  //let userNom= req.session.user.namedUser);
-  // const foundWeight = await Weight.find({})
-  //   .sort({ userDate: 1, time: 1 })
-  //   .exec();
-
-  const foundUser = await User.findOne({ username: req.session.user.namedUser })
+  console.log(req.session);
+  const foundUser = await User.findOne({ username: req.session.username })
     .populate({ path: "weights", options: { sort: { userDate: 1, time: 1 } } })
     .exec();
 
@@ -37,14 +33,16 @@ router.post("/dashboard/new", isLoggedIn, async (req, res) => {
   try {
     await myWeight.save();
     //find associated user
-    // let userNom= req.session.user.namedUser);
-    const user = await User.findOne({ username: req.session.user.namedUser });
+
+    const user = await User.findOne({ username: req.session.username });
     user.weights.push(myWeight);
     await user.save();
     //console.log(user);
+    req.flash("success_msg", "Weight Data Added Successfully");
     res.redirect("/user/dashboard");
   } catch (e) {
-    res.status(400).send(e);
+    req.flash("error_msg", "An error occurred. Try Again");
+    res.redirect("/user/dashboard");
   }
 });
 
@@ -67,9 +65,11 @@ router.put("/dashboard/:id", isLoggedIn, async (req, res) => {
 
   try {
     const data = await Weight.findByIdAndUpdate(req.params.id, formUpdate);
+    req.flash("success_msg", "Weight Data Updated Successfully");
     res.redirect("/user/dashboard");
   } catch (e) {
-    res.send("an error occurred");
+    req.flash("error_msg", "An error occurred. Try Again");
+    res.redirect("/user/dashboard");
   }
 });
 
@@ -77,9 +77,11 @@ router.delete("/dashboard/:id", isLoggedIn, async (req, res) => {
   let id = req.params.id;
   try {
     await Weight.findOneAndDelete({ _id: id });
+    req.flash("success_msg", "Weight Data Updated Successfully");
     res.redirect("/user/dashboard");
   } catch (error) {
-    res.send(error);
+    req.flash("error_msg", "An error occurred. Try Again");
+    res.redirect("/user/dashboard");
   }
 });
 

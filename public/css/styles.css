@@ -49,10 +49,13 @@ body {
 .form-container {
   width: 40%;
   margin: auto;
-  border: 1px solid green;
+  border: 1px solid coral;
   padding: 2.5%;
-  border-radius: 20px;
+  /* border-radius: 20px; */
   text-align: center;
+  border-top-left-radius: 70px;
+  border-top-right-radius: 70px;
+  border-bottom-right-radius: 70px;
 }
 
 .create-record-container {
@@ -83,6 +86,9 @@ body {
 }
 /* bootstrap grid stuff */
 
+.edit-and-delete button {
+  margin: 1.5% auto;
+}
 /* footer */
 
 #real-footer {
