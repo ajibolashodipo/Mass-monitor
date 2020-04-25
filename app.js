@@ -10,8 +10,8 @@ const session = require("express-session");
 const app = express();
 require("dotenv").config();
 
-let url = process.env.DATABASEURL;
-let port = process.env.PORT || 8080;
+const url = process.env.DATABASEURL;
+const port = process.env.PORT || 8080;
 
 mongoose
   .connect(url, {
@@ -42,7 +42,7 @@ app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     // cookie: { secure: true },
     //cookie: { maxAge: 60000 },
   })
