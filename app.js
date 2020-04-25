@@ -1,11 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-// const cookieParser = require("cookie-parser");
 const methodOverride = require("method-override");
-const ejs = require("ejs");
-const Weight = require("./models/weights");
-const User = require("./models/users");
 const indexRoute = require("./routes/index");
 const userRoute = require("./routes/user");
 const flash = require("connect-flash");
@@ -13,10 +9,9 @@ const session = require("express-session");
 
 const app = express();
 require("dotenv").config();
-let databaseURL = process.env.DATABASEURL;
-let envPORT = process.env.PORT;
-let url = databaseURL;
-let port = envPORT;
+
+let url = process.env.DATABASEURL;
+let port = process.env.PORT;
 
 mongoose
   .connect(url, {
