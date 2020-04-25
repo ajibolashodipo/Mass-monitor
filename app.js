@@ -16,7 +16,7 @@ const url = process.env.DATABASEURL;
 const port = process.env.PORT || 8080;
 
 let store = new MongoDBStore({
-  uri,
+  uri: url,
   collection: "mySessions",
 });
 
