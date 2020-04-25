@@ -10,8 +10,19 @@ router.get("/dashboard", isLoggedIn, async (req, res) => {
   const foundUser = await User.findOne({ username: req.session.username })
     .populate({ path: "weights", options: { sort: { userDate: 1, time: 1 } } })
     .exec();
+  const foundUserReverse = await User.findOne({
+    username: req.session.username,
+  })
+    .populate({
+      path: "weights",
+      options: { sort: { userDate: -1, time: -1 } },
+    })
+    .exec();
 
-  res.render("user/dashboard", { foundUser: foundUser });
+  res.render("user/dashboard", {
+    foundUser: foundUser,
+    foundUserReverse: foundUserReverse,
+  });
 });
 
 //render weight form

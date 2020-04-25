@@ -13,9 +13,11 @@ const session = require("express-session");
 
 const app = express();
 require("dotenv").config();
-
-let url = "mongodb://127.0.0.1/weight_app";
+let databaseURL = process.env.DATABASEURL;
+// let envPORT= 
+let url = databaseURL||"mongodb://127.0.0.1/weight_app";
 let port = 8080;
+
 mongoose
   .connect(url, {
     useNewUrlParser: true,

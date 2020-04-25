@@ -48,13 +48,7 @@
                               display: true,
                               text: "Plot of weights vs Dates",
                               fontSize: 15,
-                            },legend: {
-                      display: true,
-                      position: "right",
-                      labels: {
-                        fontColor: "#000",
-                      },
-                    },layout: {
+                            },layout: {
               padding: {
                 left: 30,
                 right: 0,
@@ -73,11 +67,13 @@
       <section id="bmi-section" class="col-lg-4 col-md-12 col-12">
         <div class="rando">
           <div class="bmi-container">
-            <h4>BMI Calculator</h4>
+            <h5>BMI Calculator</h5>
 
             <form id="bmi-form">
               <div class="form-group">
-                <label for="height">Height (in centimeters)</label>
+                <label class="bmi-label" for="height"
+                  >Height (in centimeters)</label
+                >
                 <input
                   type="Number"
                   class="form-control"
@@ -89,7 +85,9 @@
                 />
               </div>
               <div class="form-group">
-                <label for="weight">Weight (in kilograms)</label>
+                <label class="bmi-label" for="weight"
+                  >Weight (in kilograms)</label
+                >
                 <input
                   type="Number"
                   class="form-control"
@@ -188,13 +186,10 @@
 
   <section id="weight-cards">
     <div class="container">
-      <div class="card-columns">
-        <%foundUser.weights.forEach(mass => { %>
+      <div class="card-columns mobile-card-column">
+        <%foundUserReverse.weights.forEach(mass => { %>
         <li style="list-style-type: none;">
-          <div
-            class="card weight-card text-white mb-3"
-            style="max-width: 18rem;"
-          >
+          <div class="card weight-card text-white mb-3">
             <div class="card-body">
               <h4 class="card-title"><%=mass.weight%> kg</h4>
               <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
