@@ -40,7 +40,7 @@ app.use(methodOverride("_method"));
 //express-session
 app.use(
   session({
-    secret: process.env.SESSION_SECRET,
+    secret: 'grotesque',
     resave: false,
     saveUninitialized: false,
     // cookie: { secure: true },
