@@ -33,8 +33,8 @@
                     labels: dateArray,
                     datasets: [{
                         label: 'Weight Data',
-                        backgroundColor: 'rgba(0, 0, 0, 0.1)',
-                        borderColor: 'rgb(255, 99, 132)',
+                        backgroundColor: 'rgba(91,192,222, 0.5)',
+                        borderColor: 'rgb(0, 245, 163)',
                         data: weightArray,
                         borderWidth:3,
 
@@ -46,7 +46,7 @@
                                         options: {
                                           title: {
                               display: true,
-                              text: "Weight Plot vs Time",
+                              text: "Plot of weights vs Dates",
                               fontSize: 15,
                             },legend: {
                       display: true,
@@ -103,7 +103,7 @@
               <button
                 id="bmi-submit"
                 type="submit"
-                class="btn btn-primary"
+                class="btn btn-info"
                 style="margin-bottom: 2%;"
               >
                 Calculate
@@ -198,9 +198,9 @@
             <div class="card-body">
               <h4 class="card-title"><%=mass.weight%> kg</h4>
               <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
-              <p>Date: <%=mass.userDate%></p>
-              <p>Time: <%=mass.time%></p>
-              <p>BMI: <%=mass.bmi%></p>
+              <p class="my-card-data">Date: <%=mass.userDate%></p>
+              <p class="my-card-data">Time: <%=mass.time%></p>
+              <p class="my-card-data">BMI: <%=mass.bmi%></p>
 
               <div class="row justify-content-center edit-and-delete">
                 <div class="col-12">

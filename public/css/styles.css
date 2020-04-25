@@ -12,6 +12,7 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
+  background: linear-gradient(rgba(0, 0, 0, 0.07), rgba(0, 0, 0, 0.07));
 }
 .all-content {
   flex: 1 0 auto;
@@ -28,7 +29,7 @@ body {
 }
 .graph-container {
   width: 100%;
-  border: 1px solid red;
+  border: 1px solid #00f5a3;
   margin-bottom: 4%;
   box-shadow: 5px 7.5px #888888;
   border-radius: 20px;
@@ -38,7 +39,7 @@ body {
   width: 100%;
   margin: auto;
   text-align: center;
-  border: 1px solid blue;
+  border: 1px solid #00f5a3;
   padding: 5%;
   box-shadow: 5px 7.5px #888888;
   border-radius: 20px;
@@ -47,7 +48,8 @@ body {
 .form-container {
   width: 40%;
   margin: auto;
-  border: 1px solid coral;
+  /* border: 1px solid coral; */
+  background-color: #00f5a3;
   padding: 2.5%;
   /* border-radius: 20px; */
   text-align: center;
@@ -72,15 +74,14 @@ body {
 }
 
 .weight-card {
-  /* border-radius: 70px; */
   border-top-left-radius: 70px;
-  /* border-top-right-radius: 70px; */
+
   border-bottom-right-radius: 70px;
-  background-color: coral;
+  /* background-color: rgb(0, 245, 163); */
+  background-color: #778899;
   text-align: center;
   box-shadow: 5px 7.5px #888888;
   margin-bottom: 5%;
-  /* height: 15rem; */
 }
 /* bootstrap grid stuff */
 
@@ -118,6 +119,14 @@ body {
   font-size: 0.8rem;
 }
 
+.my-card-data {
+  /* font-family: "Cormorant Garamond", serif; */
+  /* font-family: "Comfortaa", cursive; */
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.3rem;
+  font-style: italic;
+}
+
 /* footer */
 
 #real-footer {
@@ -129,17 +138,18 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 9vh;
+  height: 8vh;
 }
 .real-footer-section h3 {
   font-weight: 100;
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #fff;
   margin: 0;
 }
 .real-footer-section .fab {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: #fff;
+  /* align-items: center; */
 }
 .real-footer-section .fab:hover {
   color: turquoise;
@@ -154,6 +164,7 @@ body {
   list-style: none;
   text-decoration: none;
   margin-right: 25%;
+  margin-top: 30%;
 }
 .real-footer-section ul li a {
   padding: 7.5%;
