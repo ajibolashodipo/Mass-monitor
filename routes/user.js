@@ -6,7 +6,7 @@ const bcrypt = require("bcryptjs");
 const isLoggedIn = require("../middleware/isLoggedIn");
 
 router.get("/dashboard", isLoggedIn, async (req, res) => {
-  console.log(req.session);
+  //console.log(req.user);
   const foundUser = await User.findOne({ username: req.session.username })
     .populate({ path: "weights", options: { sort: { userDate: 1, time: 1 } } })
     .exec();

@@ -10,14 +10,9 @@
       crossorigin="anonymous"
     />
     <link
-      href="https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap"
+      href="https://fonts.googleapis.com/css?family=Spartan:400,700&display=swap"
       rel="stylesheet"
     />
-
-    <!-- <link
-      href="https://fonts.googleapis.com/css?family=Cormorant+Garamond&display=swap"
-      rel="stylesheet"
-    /> -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
@@ -34,7 +29,13 @@
     <nav
       class="navbar navbar-expand-lg justify-content-between navbar-dark bg-dark"
     >
+      <%if(!currentUser){ %>
       <a class="navbar-brand" id="site-title" href="/"> Monitor-my-Mass</a>
+      <%} else {%>
+      <a class="navbar-brand" id="site-title" href="/user/dashboard">
+        Monitor-my-Mass</a
+      >
+      <%}%>
 
       <button
         class="navbar-toggler"
@@ -50,16 +51,18 @@
 
       <div class="collapse navbar-collapse" id="navbarColor02">
         <ul class="navbar-nav ml-auto">
+          <%if(!currentUser){ %>
           <li class="nav-item">
             <a class="nav-link" href="/register">Sign Up</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/login">Login</a>
           </li>
-
+          <%} else {%>
           <li class="nav-item">
             <a class="nav-link" href="/logout">Logout</a>
           </li>
+          <%}%>
         </ul>
       </div>
     </nav>

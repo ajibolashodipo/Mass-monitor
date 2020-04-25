@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
+// const cookieParser = require("cookie-parser");
 const methodOverride = require("method-override");
 const ejs = require("ejs");
 const Weight = require("./models/weights");
@@ -39,7 +39,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
 
 //cookie parser
-app.use(cookieParser("secret"));
+//app.use(cookieParser("secret"));
 //express-session
 app.use(
   session({
@@ -56,7 +56,7 @@ app.use(flash());
 //global variables.
 
 app.use((req, res, next) => {
-  res.locals.currentUser = req.session.user;
+  res.locals.currentUser = req.session.username;
   res.locals.success_msg = req.flash("success_msg");
   res.locals.error_msg = req.flash("error_msg");
   //res.locals.error = req.flash("error");

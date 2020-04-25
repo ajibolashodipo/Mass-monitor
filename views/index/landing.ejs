@@ -1,9 +1,21 @@
 <%- include ("../partials/header")%>
 <div class="all-content">
-  <h1>Welcome to weight tracker</h1>
+  <div class="container">
+    <div class="row">
+      <div class="left-content col-md-6">
+        <h1>Monitor your mass</h1>
+        <p>
+          Keep track of your progress by generating weight plots over time. Also
+          ships with a built-in Body Mass Index (BMI) calculator to help you
+          stay healthy
+        </p>
 
-  <li><a href="/register">Sign Up</a></li>
-  <li><a href="/login">login</a></li>
-  <li><a href="/logout">Logout</a></li>
+        <a href="/register" class="btn btn-info landing-button">Get Started</a>
+      </div>
+      <img class="col-md-6" src="/img/landing2.svg" alt="" />
+    </div>
+  </div>
+  <!--  -->
 </div>
+
 <%- include ("../partials/footer")%>

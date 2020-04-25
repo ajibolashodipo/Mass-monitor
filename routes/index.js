@@ -107,9 +107,10 @@ router.post("/login", async (req, res) => {
 router.get("/logout", async (req, res) => {
   //Destroys the session and logs out the user
   try {
-    // await req.session.destroy();
-    req.flash("success_msg", "Logout Successful");
-    res.redirect("/login");
+    req.session.destroy((err) => {
+      if (err) return next(err);
+      res.redirect("/login");
+    });
   } catch (error) {
     req.flash("error_msg", "An error occurred. Try again");
     res.redirect("/user/dashboard");

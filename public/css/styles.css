@@ -3,9 +3,7 @@
   padding: 0;
   box-sizing: border-box;
 
-  /* font-family: "Courier"; */
-  font-family: "Raleway", sans-serif;
-  /* font-family: "Cormorant Garamond", serif; */
+  font-family: "Spartan", sans-serif;
 }
 html {
   height: 100%;
@@ -54,7 +52,7 @@ body {
   /* border-radius: 20px; */
   text-align: center;
   border-top-left-radius: 70px;
-  border-top-right-radius: 70px;
+  /* border-top-right-radius: 70px; */
   border-bottom-right-radius: 70px;
 }
 
@@ -76,7 +74,7 @@ body {
 .weight-card {
   /* border-radius: 70px; */
   border-top-left-radius: 70px;
-  border-top-right-radius: 70px;
+  /* border-top-right-radius: 70px; */
   border-bottom-right-radius: 70px;
   background-color: coral;
   text-align: center;
@@ -89,6 +87,37 @@ body {
 .edit-and-delete button {
   margin: 1.5% auto;
 }
+
+.left-content {
+  padding: 5%;
+  text-align: center;
+  margin-top: 2.5%;
+}
+
+.left-content h1 {
+  /* padding: 5%; */
+  /* text-align: center; */
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.left-content a {
+  margin-top: 2.5%;
+}
+.left-content p {
+  letter-spacing: 0.05rem;
+  line-height: 2rem;
+}
+.left-content .landing-button {
+  width: 50%;
+  padding: 2%;
+}
+
+.index-addendum {
+  margin-top: 2.5%;
+  font-size: 0.8rem;
+}
+
 /* footer */
 
 #real-footer {
