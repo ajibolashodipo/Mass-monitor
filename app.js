@@ -11,7 +11,7 @@ const app = express();
 require("dotenv").config();
 
 let url = process.env.DATABASEURL;
-let port = process.env.PORT;
+let port = process.env.PORT || 8080;
 
 mongoose
   .connect(url, {
