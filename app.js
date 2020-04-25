@@ -6,12 +6,19 @@ const indexRoute = require("./routes/index");
 const userRoute = require("./routes/user");
 const flash = require("connect-flash");
 const session = require("express-session");
+// Package
+const MongoDBStore = require("connect-mongodb-session")(session);
 
 const app = express();
 require("dotenv").config();
 
 const url = process.env.DATABASEURL;
 const port = process.env.PORT || 8080;
+
+let store = new MongoDBStore({
+  uri,
+  collection: "mySessions",
+});
 
 mongoose
   .connect(url, {
@@ -35,16 +42,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //method override
 app.use(methodOverride("_method"));
 
-//cookie parser
-//app.use(cookieParser("secret"));
 //express-session
 app.use(
   session({
-    secret: 'grotesque',
-    resave: false,
-    saveUninitialized: false,
-    // cookie: { secure: true },
-    //cookie: { maxAge: 60000 },
+    secret: "This is a secret",
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
+    },
+    store: store,
+    resave: true,
+    saveUninitialized: true,
   })
 );
 
