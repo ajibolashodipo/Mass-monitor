@@ -23,6 +23,7 @@
   height: 40vh !important;
   margin-bottom: 7.5%;
   margin-top: 7.5%;
+  box-shadow: none;
 }
 
 .bmi-label {
@@ -31,10 +32,12 @@
 
 .bmi-container {
   margin-bottom: 7.5%;
+  box-shadow: none;
 }
 
 .create-record-container {
   margin-bottom: 10%;
+  box-shadow: none;
 }
 .create-record-container button {
   width: 80%;
@@ -49,6 +52,7 @@
 .weight-card {
   width: 90% !important;
   margin: auto;
+  box-shadow: none;
 }
 
 .real-footer-section h3 {
