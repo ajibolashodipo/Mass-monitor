@@ -6,8 +6,6 @@ const indexRoute = require("./routes/index");
 const userRoute = require("./routes/user");
 const flash = require("connect-flash");
 const session = require("express-session");
-// Package
-const MongoDBStore = require("connect-mongodb-session")(session);
 
 const app = express();
 require("dotenv").config();
@@ -15,16 +13,7 @@ require("dotenv").config();
 const url = process.env.DATABASEURL;
 const port = process.env.PORT || 8080;
 
-let store = new MongoDBStore({
-  uri: process.env.DATABASEURL,
-  collection: "mySessions",
-});
-
-// Catch errors
-store.on("error", function (error) {
-  console.log(error);
-});
-
+console.log(url);
 mongoose
   .connect(url, {
     useNewUrlParser: true,
@@ -50,13 +39,11 @@ app.use(methodOverride("_method"));
 //express-session
 app.use(
   session({
-    secret: "This is a secret",
-    cookie: {
-      maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
-    },
-    store: store,
-    resave: true,
-    saveUninitialized: true,
+    secret: "grotesque",
+    resave: false,
+    saveUninitialized: false,
+    // cookie: { secure: true },
+    //cookie: { maxAge: 60000 },
   })
 );
 
