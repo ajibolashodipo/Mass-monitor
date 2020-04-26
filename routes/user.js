@@ -88,7 +88,7 @@ router.delete("/dashboard/:id", isLoggedIn, async (req, res) => {
   let id = req.params.id;
   try {
     await Weight.findOneAndDelete({ _id: id });
-    req.flash("success_msg", "Weight Data Updated Successfully");
+    req.flash("success_msg", "Weight Data Deleted Successfully");
     res.redirect("/user/dashboard");
   } catch (error) {
     req.flash("error_msg", "An error occurred. Try Again");

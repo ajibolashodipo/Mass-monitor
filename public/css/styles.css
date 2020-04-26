@@ -46,6 +46,13 @@ body {
   border-radius: 20px;
 }
 
+.bmi-container h6 {
+  margin-bottom: 5.5%;
+}
+.bmi-container input {
+  font-size: 0.9rem;
+}
+
 .form-container {
   width: 40%;
   margin: auto;
