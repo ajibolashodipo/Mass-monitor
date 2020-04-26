@@ -15,6 +15,7 @@ require("dotenv").config();
 const url = process.env.DATABASEURL;
 const port = process.env.PORT || 8080;
 
+console.log(url);
 let store = new MongoDBStore({
   uri: url,
   collection: "mySessions",
