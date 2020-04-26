@@ -20,6 +20,8 @@
                             dateArray.push(item.userDate)
                              //console.log(item)
                            }
+                           //global options
+                             Chart.defaults.global.defaultFontFamily = 'Courier';
                         let myChart = document.getElementById('myChart').getContext('2d');
                         let chart = new Chart(myChart, {
               // The type of chart we want to create
@@ -30,7 +32,7 @@
                 labels: dateArray,
                 datasets: [
                   {
-                    label: "Weight Data",
+                    label: "Weight",
                     backgroundColor: "rgba(91, 192, 222, 0.5)",
                     borderColor: "#00f5a3",
                     data: weightArray,
@@ -43,16 +45,51 @@
 
               // Configuration options go here
               options: {
+                responsive:true,
+                 maintainAspectRatio: false,
+                 scales: {
+                  xAxes: [ {
+                    // type: 'time',
+                    display: true,
+                    scaleLabel: {
+                      display: true,
+                      labelString: 'Date (YYYY-MM-DD)'
+                    },
+                    ticks: {
+
+                        fontStyle: 'bold',
+                        fontColor: '#FF0000',
+                        fontFamily:'Courier',
+                        autoSkip: false,
+                        maxRotation: 0,
+                        minRotation: 0
+
+                    }
+                  } ],
+                  yAxes: [ {
+                    display: true,
+                    scaleLabel: {
+                      display: true,
+                      labelString: 'Weight (kg)'
+                    },ticks: {
+
+                        fontStyle: 'bold',
+                        fontColor: '#FF0000',
+                        fontFamily:'Courier'
+
+                    }
+                  } ]
+                },
                 title: {
                   display: true,
-                  text: "Plot of weights vs Dates",
+                  text: "Plot of Weights over Time",
                   fontSize: 15,
                 },
                 layout: {
                   padding: {
-                    left: 30,
-                    right: 0,
-                    bottom: 30,
+                    left: 10,
+                    right: 5,
+                    bottom: 20,
                     top: 0,
                   },
                 },

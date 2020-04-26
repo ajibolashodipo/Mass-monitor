@@ -20,7 +20,7 @@
 
 .graph-container {
   width: 100%;
-  border: 1px solid #00f5a3;
+  height: 40vh !important;
   margin-bottom: 10%;
   margin-top: 10%;
 }

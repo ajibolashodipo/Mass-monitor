@@ -33,6 +33,7 @@ body {
   margin-bottom: 4%;
   box-shadow: 5px 7.5px #888888;
   border-radius: 20px;
+  height: 55vh !important;
 }
 
 .bmi-container {
