@@ -15,7 +15,7 @@ router.get("/dashboard", isLoggedIn, async (req, res) => {
   })
     .populate({
       path: "weights",
-      options: { sort: { userDate: -1, time: -1 } },
+      options: { sort: { date: -1, time: -1 } },
     })
     .exec();
 
