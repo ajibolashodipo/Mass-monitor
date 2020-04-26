@@ -20,6 +20,11 @@ let store = new MongoDBStore({
   collection: "mySessions",
 });
 
+// Catch errors
+store.on("error", function (error) {
+  console.log(error);
+});
+
 mongoose
   .connect(url, {
     useNewUrlParser: true,
