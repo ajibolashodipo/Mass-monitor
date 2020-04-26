@@ -11,54 +11,52 @@
           </div>
 
           <script>
-             let weightArray=[]
-              let dateArray=[]
+                         let weightArray=[]
+                          let dateArray=[]
 
-              let shod = <%-JSON.stringify(foundUser.weights)%>;
-               for (let item of shod) {
-                weightArray.push(item.weight)
-                dateArray.push(item.userDate)
-                 //console.log(item)
-               }
+                          let shod = <%-JSON.stringify(foundUser.weights)%>;
+                           for (let item of shod) {
+                            weightArray.push(item.weight)
+                            dateArray.push(item.userDate)
+                             //console.log(item)
+                           }
+                        let myChart = document.getElementById('myChart').getContext('2d');
+                        let chart = new Chart(myChart, {
+              // The type of chart we want to create
+              type: "line",
 
+              // The data for our dataset
+              data: {
+                labels: dateArray,
+                datasets: [
+                  {
+                    label: "Weight Data",
+                    backgroundColor: "rgba(91, 192, 222, 0.5)",
+                    borderColor: "#00f5a3",
+                    data: weightArray,
+                    borderWidth: 3,
 
-            ////////
-            let myChart = document.getElementById('myChart').getContext('2d');
-            let chart = new Chart(myChart, {
-                // The type of chart we want to create
-                type: 'line',
-
-                // The data for our dataset
-                data: {
-                    labels: dateArray,
-                    datasets: [{
-                        label: 'Weight Data',
-                        backgroundColor: 'rgba(91,192,222, 0.5)',
-                        borderColor: 'rgb(0, 245, 163)',
-                        data: weightArray,
-                        borderWidth:3,
-
-                        hoverBorderColor:'#000'
-                    }]
-                },
-
-                  // Configuration options go here
-                                        options: {
-                                          title: {
-                              display: true,
-                              text: "Plot of weights vs Dates",
-                              fontSize: 15,
-                            },layout: {
-              padding: {
-                left: 30,
-                right: 0,
-                bottom: 30,
-                top: 0,
+                    hoverBorderColor: "#000",
+                  },
+                ],
               },
-            },
-                                        }
 
-
+              // Configuration options go here
+              options: {
+                title: {
+                  display: true,
+                  text: "Plot of weights vs Dates",
+                  fontSize: 15,
+                },
+                layout: {
+                  padding: {
+                    left: 30,
+                    right: 0,
+                    bottom: 30,
+                    top: 0,
+                  },
+                },
+              },
             });
           </script>
         </div>
