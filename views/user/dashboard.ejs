@@ -104,7 +104,6 @@
         <div class="rando">
           <div class="bmi-container">
             <h6>BMI Calculator</h6>
-            <!--  -->
             <!-- radio button -->
             <div
               class="btn-group btn-group-toggle"
@@ -220,6 +219,12 @@
             let metric = document.querySelector("#metric");
             let formImperial = document.querySelectorAll(".form-imperial");
             let formMetric = document.querySelectorAll(".form-metric");
+            //initialize array that stores bmi data in local storage
+            let bmiArr = [];
+            //set first element to avoid empty bmi values in the form
+            bmiArr[0] = 23;
+            //set array into local storage
+            localStorage.setItem("bmiArray", JSON.stringify(bmiArr));
 
             function showAndFade(myTime) {
               errorAlert.style.visibility = "visible";
@@ -268,6 +273,10 @@
                   metricWeight.value /
                   (metricHeight.value * metricHeight.value);
                 let bmi = bmiTemp.toFixed(1);
+                //push current value of bmi into the array that goes into the local storage
+                bmiArr.push(bmi);
+                //store BMI result in local storage
+                localStorage.setItem("bmiArray", JSON.stringify(bmiArr));
 
                 if (bmiTemp < 18.5) {
                   errorAlert.innerHTML = `BMI is ${bmi}. Underweight`;
@@ -302,6 +311,11 @@
                   (703 * imperialWeight.value) /
                   (144 * imperialHeight.value * imperialHeight.value);
                 let bmi = bmiTemp.toFixed(1);
+
+                //push current value of bmi into the array that goes into the local storage
+                bmiArr.push(bmi);
+                //store BMI result in local storage
+                localStorage.setItem("bmiArray", JSON.stringify(bmiArr));
 
                 if (bmiTemp < 18.5) {
                   errorAlert.innerHTML = `BMI is ${bmi}. Underweight`;
