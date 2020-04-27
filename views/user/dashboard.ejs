@@ -21,7 +21,7 @@
                              //console.log(item)
                            }
                            //global options
-                             Chart.defaults.global.defaultFontFamily = 'Courier';
+                             Chart.defaults.global.defaultFontFamily = 'Lato';
                         let myChart = document.getElementById('myChart').getContext('2d');
                         let chart = new Chart(myChart, {
               // The type of chart we want to create
@@ -37,6 +37,7 @@
                     borderColor: "#00f5a3",
                     data: weightArray,
                     borderWidth: 3,
+
 
                     hoverBorderColor: "#000",
                   },
@@ -57,9 +58,9 @@
                     },
                     ticks: {
 
-                        fontStyle: 'bold',
+                        fontStyle: 'normal',
                         fontColor: '#FF0000',
-                        fontFamily:'Courier',
+                        fontFamily:'Lato',
                         autoSkip: false,
                         maxRotation: 0,
                         minRotation: 0
@@ -73,9 +74,9 @@
                       labelString: 'Weight (kg)'
                     },ticks: {
 
-                        fontStyle: 'bold',
+                        fontStyle: 'normal',
                         fontColor: '#FF0000',
-                        fontFamily:'Courier'
+                        fontFamily:'Lato'
 
                     }
                   } ]
@@ -202,7 +203,7 @@
 
             <div
               class="alert error-alert alert-danger"
-              style="visibility: hidden; font-size:0.8rem"
+              style="visibility: hidden; font-size: 0.8rem;"
               role="alert"
             ></div>
           </div>

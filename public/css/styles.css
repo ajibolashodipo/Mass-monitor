@@ -56,14 +56,22 @@ body {
 .form-container {
   width: 40%;
   margin: auto;
-  /* border: 1px solid coral; */
   background-color: #00f5a3;
   padding: 2.5%;
-  /* border-radius: 20px; */
   text-align: center;
   border-top-left-radius: 70px;
-  /* border-top-right-radius: 70px; */
   border-bottom-right-radius: 70px;
+}
+
+.form-container h5 {
+  margin-bottom: 3%;
+}
+.form-container input,
+.form-container label {
+  font-size: 0.8rem;
+}
+.form-container button {
+  font-size: 0.9rem;
 }
 
 .create-record-container {
