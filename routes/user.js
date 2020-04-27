@@ -6,7 +6,6 @@ const bcrypt = require("bcryptjs");
 const isLoggedIn = require("../middleware/isLoggedIn");
 
 router.get("/dashboard", isLoggedIn, async (req, res) => {
-  //console.log(req.user);
   const foundUser = await User.findOne({ username: req.session.username })
     .populate({ path: "weights", options: { sort: { userDate: 1, time: 1 } } })
     .exec();
@@ -48,7 +47,6 @@ router.post("/dashboard/new", isLoggedIn, async (req, res) => {
     const user = await User.findOne({ username: req.session.username });
     user.weights.push(myWeight);
     await user.save();
-    //console.log(user);
     req.flash("success_msg", "Weight Data Added Successfully");
     res.redirect("/user/dashboard");
   } catch (e) {
@@ -62,7 +60,6 @@ router.get("/dashboard/:id/edit", isLoggedIn, async (req, res) => {
   let id = req.params.id;
   try {
     const updateData = await Weight.findOne({ _id: id });
-    // console.log(updateData);
     res.render("user/edit", { updateData });
   } catch (e) {
     res.send("an error occurred");

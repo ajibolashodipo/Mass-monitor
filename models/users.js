@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-// const Weight = require("./weights);
 const Weight = require("./weights");
 
 const userSchema = new mongoose.Schema({

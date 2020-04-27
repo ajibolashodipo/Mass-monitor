@@ -22,14 +22,6 @@
             name="bmi" placeholder="Enter BMI" required value= />
           </div>
 
-          <script>
-            //gets and parses the array and stores the value into a variable
-            let currentBMI = JSON.parse(localStorage.getItem("bmiArray"));
-            //Gets the most recent value (last element) of the array
-            let realBMI = currentBMI[currentBMI.length - 1];
-            //injects this value into the DOM
-            document.getElementById("bmi").value = realBMI;
-          </script>
           <div class="form-group">
             <label for="date">Date</label>
             <input
@@ -65,5 +57,19 @@
     </div>
   </section>
 </div>
+
+<script>
+  //gets and parses the array and stores the value into a variable
+  let currentBMI = JSON.parse(localStorage.getItem("bmiArray"));
+  //Gets the most recent value (last element) of the array
+  let realBMI = currentBMI[currentBMI.length - 1];
+  //injects this value into the DOM
+  document.getElementById("bmi").value = realBMI;
+
+  //moment js for date
+  document.getElementById("date").value = moment().format("YYYY-MM-DD");
+  //moment js for time
+  document.getElementById("time").value = moment().format("HH:mm");
+</script>
 
 <%- include ("../partials/footer")%>

@@ -73,7 +73,6 @@ router.post("/login", async (req, res) => {
     //check if user exists in the db
     const user = await User.findOne({ username: username });
 
-    //console.log(user);
     if (!user) {
       req.flash("error_msg", "Username or password is wrong");
       return res.redirect("/login");
@@ -94,7 +93,6 @@ router.post("/login", async (req, res) => {
     req.session.isLoggedIn = true;
     await req.session.save();
 
-    //console.log(req.session);
     req.flash("success_msg", "Login Successful");
     res.redirect("/user/dashboard");
 
