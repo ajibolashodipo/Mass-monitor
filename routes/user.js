@@ -4,6 +4,7 @@ const Weight = require("../models/weights");
 const User = require("../models/users");
 const bcrypt = require("bcryptjs");
 const isLoggedIn = require("../middleware/isLoggedIn");
+const mongoose = require("mongoose");
 
 router.get("/dashboard", isLoggedIn, async (req, res) => {
   const foundUser = await User.findOne({ username: req.session.username })
@@ -84,6 +85,11 @@ router.put("/dashboard/:id", isLoggedIn, async (req, res) => {
 router.delete("/dashboard/:id", isLoggedIn, async (req, res) => {
   let id = req.params.id;
   try {
+    const data = await User.findOneAndUpdate(
+      { username: req.session.username },
+      { $pull: { weights: mongoose.Types.ObjectId(id) } },
+      { new: true }
+    );
     await Weight.findOneAndDelete({ _id: id });
 
     req.flash("success_msg", "Weight Data Deleted Successfully");
