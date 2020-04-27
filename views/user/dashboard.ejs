@@ -103,33 +103,90 @@
         <div class="rando">
           <div class="bmi-container">
             <h6>BMI Calculator</h6>
+            <!--  -->
+            <!-- radio button -->
+            <div
+              class="btn-group btn-group-toggle"
+              style="margin-bottom: 3%;"
+              data-toggle="buttons"
+            >
+              <label
+                class="btn btn-secondary active"
+                style="font-size: 0.7rem;"
+              >
+                <input
+                  type="radio"
+                  name="options"
+                  id="metric"
+                  autocomplete="off"
+                  value="1"
+                  checked
+                />
+                Metric
+              </label>
+              <label class="btn btn-secondary" style="font-size: 0.7rem;">
+                <input
+                  type="radio"
+                  name="options"
+                  id="imperial"
+                  autocomplete="off"
+                  value="2"
+                />
+                Imperial
+              </label>
+            </div>
+
+            <!-- ///////////// -->
+            <!-- selective forms -->
+            <!-- ///////////// -->
 
             <form id="bmi-form">
-              <div class="form-group">
-                <!-- <label class="bmi-label" for="height"
-                  >Height (in centimeters)</label
-                > -->
+              <div class="form-group form-metric">
                 <input
                   type="Number"
                   class="form-control"
-                  id="height"
-                  name="height"
-                  aria-describedby="emailHelp"
+                  name="metric-weight"
+                  id="metric-weight"
+                  placeholder="Enter weight (kg)"
+                  style="font-size: 0.7rem;"
                   required
-                  placeholder="Enter height (cm)"
                 />
               </div>
-              <div class="form-group">
-                <!-- <label class="bmi-label" for="weight"
-                  >Weight (in kilograms)</label
-                > -->
+              <div class="form-group form-metric">
                 <input
                   type="Number"
                   class="form-control"
-                  name="weight"
-                  id="weight"
-                  placeholder="Enter weight (kg)"
+                  id="metric-height"
+                  name="metric-height"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter height (m)"
+                  style="font-size: 0.7rem;"
                   required
+                />
+              </div>
+
+              <!-- another form -->
+              <div class="form-group form-imperial">
+                <input
+                  type="Number"
+                  class="form-control"
+                  name="imperial-weight"
+                  id="imperial-weight"
+                  placeholder="Enter weight (lbs)"
+                  style="font-size: 0.7rem;"
+                  required
+                />
+              </div>
+              <div class="form-group form-imperial">
+                <input
+                  type="Number"
+                  class="form-control"
+                  id="imperial-height"
+                  name="imperial-height"
+                  aria-describedby="emailHelp"
+                  required
+                  placeholder="Enter height (feet)"
+                  style="font-size: 0.7rem;"
                 />
               </div>
 
@@ -137,7 +194,7 @@
                 id="bmi-submit"
                 type="submit"
                 class="btn btn-info"
-                style="margin-bottom: 2%;"
+                style="margin-bottom: 2%; font-size: 0.8rem;"
               >
                 Calculate
               </button>
@@ -145,17 +202,23 @@
 
             <div
               class="alert error-alert alert-danger"
-              style="visibility: hidden;"
+              style="visibility: hidden; font-size:0.8rem"
               role="alert"
             ></div>
           </div>
 
           <script>
-            let formHeight = document.getElementById("height");
-            let formWeight = document.getElementById("weight");
+            let metricHeight = document.getElementById("metric-height");
+            let metricWeight = document.getElementById("metric-weight");
+            let imperialHeight = document.getElementById("imperial-height");
+            let imperialWeight = document.getElementById("imperial-weight");
             let bmiResultText = document.getElementById("bmi-result-text");
             let bmiSubmit = document.getElementById("bmi-submit");
             let errorAlert = document.querySelector(".error-alert");
+            let imperial = document.querySelector("#imperial");
+            let metric = document.querySelector("#metric");
+            let formImperial = document.querySelectorAll(".form-imperial");
+            let formMetric = document.querySelectorAll(".form-metric");
 
             function showAndFade(myTime) {
               errorAlert.style.visibility = "visible";
@@ -165,41 +228,97 @@
               return;
             }
 
+            imperial.addEventListener("click", (e) => {
+              e.preventDefault();
+              // imperial radio check= true
+              imperial.checked = true;
+              metric.checked = false;
+
+              //selectively display form
+              $(".form-imperial").show();
+              $(".form-metric").hide();
+            });
+            metric.addEventListener("click", (e) => {
+              e.preventDefault();
+              // metric radio check= true
+              imperial.checked = false;
+              metric.checked = true;
+              //selectively display form
+              $(".form-imperial").hide();
+              $(".form-metric").show();
+            });
+
             bmiSubmit.addEventListener("click", (e) => {
               e.preventDefault();
-              //validation
-              if (!formHeight.value || !formWeight.value) {
-                errorAlert.innerHTML = `Error: Empty input field(s)`;
-                showAndFade(2000);
-                return;
-              }
-              if (formHeight.value < 0 || formWeight.value < 0) {
-                errorAlert.innerHTML = `Error: Input cannot be negative`;
-                showAndFade(2000);
-                return;
-              }
+              //metric validation
+              if (metric.checked) {
+                if (!metricHeight.value || !metricWeight.value) {
+                  errorAlert.innerHTML = `Error: Empty input field(s)`;
+                  showAndFade(2000);
+                  return;
+                }
+                if (metricHeight.value < 0 || metricWeight.value < 0) {
+                  errorAlert.innerHTML = `Error: Input cannot be negative`;
+                  showAndFade(2000);
+                  return;
+                }
+                //calculation
+                let bmiTemp =
+                  metricWeight.value /
+                  (metricHeight.value * metricHeight.value);
+                let bmi = bmiTemp.toFixed(1);
 
-              let bmiTemp =
-                (10000 * formWeight.value) /
-                (formHeight.value * formHeight.value);
-              let bmi = bmiTemp.toFixed(1);
+                if (bmiTemp < 18.5) {
+                  errorAlert.innerHTML = `BMI is ${bmi}. Underweight`;
+                  showAndFade(5000);
+                  return;
+                } else if (bmiTemp < 24.9) {
+                  errorAlert.innerHTML = `BMI is ${bmi}. Normal`;
+                  showAndFade(5000);
+                  return;
+                } else if (bmiTemp < 29.9) {
+                  errorAlert.innerHTML = `BMI is ${bmi}. Overweight`;
+                  showAndFade(5000);
+                  return;
+                } else {
+                  errorAlert.innerHTML = `BMI is ${bmi}. Obese`;
+                  showAndFade(5000);
+                  return;
+                }
+              } //imperial validation
+              if (imperial.checked) {
+                if (!imperialHeight.value || !imperialWeight.value) {
+                  errorAlert.innerHTML = `Error: Empty input field(s)`;
+                  showAndFade(2000);
+                  return;
+                }
+                if (imperialHeight.value < 0 || imperialWeight.value < 0) {
+                  errorAlert.innerHTML = `Error: Input cannot be negative`;
+                  showAndFade(2000);
+                  return;
+                }
+                let bmiTemp =
+                  (703 * imperialWeight.value) /
+                  (144 * imperialHeight.value * imperialHeight.value);
+                let bmi = bmiTemp.toFixed(1);
 
-              if (bmiTemp < 18.5) {
-                errorAlert.innerHTML = `BMI is ${bmi}. Underweight`;
-                showAndFade(5000);
-                return;
-              } else if (bmiTemp < 24.9) {
-                errorAlert.innerHTML = `BMI is ${bmi}. Normal`;
-                showAndFade(5000);
-                return;
-              } else if (bmiTemp < 29.9) {
-                errorAlert.innerHTML = `BMI is ${bmi}. Overweight`;
-                showAndFade(5000);
-                return;
-              } else {
-                errorAlert.innerHTML = `BMI is ${bmi}. Obese`;
-                showAndFade(5000);
-                return;
+                if (bmiTemp < 18.5) {
+                  errorAlert.innerHTML = `BMI is ${bmi}. Underweight`;
+                  showAndFade(5000);
+                  return;
+                } else if (bmiTemp < 24.9) {
+                  errorAlert.innerHTML = `BMI is ${bmi}. Normal`;
+                  showAndFade(5000);
+                  return;
+                } else if (bmiTemp < 29.9) {
+                  errorAlert.innerHTML = `BMI is ${bmi}. Overweight`;
+                  showAndFade(5000);
+                  return;
+                } else {
+                  errorAlert.innerHTML = `BMI is ${bmi}. Obese`;
+                  showAndFade(5000);
+                  return;
+                }
               }
             });
           </script>
