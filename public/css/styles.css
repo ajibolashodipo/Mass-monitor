@@ -135,6 +135,10 @@ body {
   font-style: italic;
 }
 
+.form-imperial {
+  display: none;
+}
+
 /* footer */
 
 #real-footer {
