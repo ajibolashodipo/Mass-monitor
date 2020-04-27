@@ -10,17 +10,17 @@ router.get("/dashboard", isLoggedIn, async (req, res) => {
     .populate({ path: "weights", options: { sort: { userDate: 1, time: 1 } } })
     .exec();
   const foundUserReverse = await User.findOne({
-    username: req.session.username,
+    username: req.session.username
   })
     .populate({
       path: "weights",
-      options: { sort: { date: -1, time: -1 } },
+      options: { sort: { date: -1, time: -1 } }
     })
     .exec();
 
   res.render("user/dashboard", {
     foundUser: foundUser,
-    foundUserReverse: foundUserReverse,
+    foundUserReverse: foundUserReverse
   });
 });
 
@@ -36,7 +36,7 @@ router.post("/dashboard/new", isLoggedIn, async (req, res) => {
     userDate: date,
     time,
     weight,
-    bmi,
+    bmi
   };
   const myWeight = new Weight(formDetail);
 
@@ -85,6 +85,7 @@ router.delete("/dashboard/:id", isLoggedIn, async (req, res) => {
   let id = req.params.id;
   try {
     await Weight.findOneAndDelete({ _id: id });
+
     req.flash("success_msg", "Weight Data Deleted Successfully");
     res.redirect("/user/dashboard");
   } catch (error) {

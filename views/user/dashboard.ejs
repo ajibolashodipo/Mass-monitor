@@ -220,10 +220,7 @@
             let formMetric = document.querySelectorAll(".form-metric");
             //initialize array that stores bmi data in local storage
             let bmiArr = [];
-            //set first element to avoid empty bmi values in the form
-            bmiArr[0] = 23;
-            //set array into local storage
-            localStorage.setItem("bmiArray", JSON.stringify(bmiArr));
+            let weightArr = [];
 
             function showAndFade(myTime) {
               errorAlert.style.visibility = "visible";
