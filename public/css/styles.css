@@ -2,18 +2,17 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
   font-family: "Spartan", sans-serif;
 }
 html {
-  height: 100%;
+  height: 100vh;
 }
 body {
   height: 100vh;
   display: flex;
   flex-direction: column;
   background: linear-gradient(rgba(0, 0, 0, 0.07), rgba(0, 0, 0, 0.07));
-  overflow: hidden;
+   
 }
 .all-content {
   flex: 1 0 auto;
@@ -22,7 +21,6 @@ body {
 
 .container {
   width: 100%;
-  overflow: hidden;
   margin: 1.5% auto;
   padding: 1%;
 }
@@ -107,7 +105,7 @@ body {
 .left-content {
   padding: 5%;
   text-align: center;
-  margin-top: 2.5%;
+  margin-top: 1.5%;
 }
 
 .left-content h1 {
