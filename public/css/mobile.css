@@ -22,11 +22,10 @@
 }
 
 .graph-container {
-  width: 100%;
+  width: 95%;
   height: 40vh !important;
   margin-bottom: 7.5%;
   margin-top: 7.5%;
-  box-shadow: none;
 }
 
 .bmi-label {
@@ -35,7 +34,7 @@
 
 .bmi-container {
   margin-bottom: 7.5%;
-  box-shadow: none;
+  width: 95%;
 }
 
 .create-record-container {
