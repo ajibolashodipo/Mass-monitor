@@ -207,131 +207,130 @@
           </div>
 
           <script>
-            let metricHeight = document.getElementById("metric-height");
-            let metricWeight = document.getElementById("metric-weight");
-            let imperialHeight = document.getElementById("imperial-height");
-            let imperialWeight = document.getElementById("imperial-weight");
-            let bmiResultText = document.getElementById("bmi-result-text");
-            let bmiSubmit = document.getElementById("bmi-submit");
-            let errorAlert = document.querySelector(".error-alert");
-            let imperial = document.querySelector("#imperial");
-            let metric = document.querySelector("#metric");
-            let formImperial = document.querySelectorAll(".form-imperial");
-            let formMetric = document.querySelectorAll(".form-metric");
+            let metricHeight = document.getElementById("metric-height")
+            let metricWeight = document.getElementById("metric-weight")
+            let imperialHeight = document.getElementById("imperial-height")
+            let imperialWeight = document.getElementById("imperial-weight")
+            let bmiResultText = document.getElementById("bmi-result-text")
+            let bmiSubmit = document.getElementById("bmi-submit")
+            let errorAlert = document.querySelector(".error-alert")
+            let imperial = document.querySelector("#imperial")
+            let metric = document.querySelector("#metric")
+            let formImperial = document.querySelectorAll(".form-imperial")
+            let formMetric = document.querySelectorAll(".form-metric")
             //initialize array that stores bmi data in local storage
-            let bmiArr = [];
-            let weightArr = [];
+            let bmiArr = []
+            let weightArr = []
 
             function showAndFade(myTime) {
-              errorAlert.style.visibility = "visible";
+              errorAlert.style.visibility = "visible"
               setTimeout(function () {
-                errorAlert.style.visibility = "hidden";
-              }, myTime);
-              return;
+                errorAlert.style.visibility = "hidden"
+              }, myTime)
+              return
             }
 
             imperial.addEventListener("click", (e) => {
-              e.preventDefault();
+              e.preventDefault()
               // imperial radio check= true
-              imperial.checked = true;
-              metric.checked = false;
+              imperial.checked = true
+              metric.checked = false
 
               //selectively display form
-              $(".form-imperial").show();
-              $(".form-metric").hide();
-            });
+              $(".form-imperial").show()
+              $(".form-metric").hide()
+            })
             metric.addEventListener("click", (e) => {
-              e.preventDefault();
+              e.preventDefault()
               // metric radio check= true
-              imperial.checked = false;
-              metric.checked = true;
+              imperial.checked = false
+              metric.checked = true
               //selectively display form
-              $(".form-imperial").hide();
-              $(".form-metric").show();
-            });
+              $(".form-imperial").hide()
+              $(".form-metric").show()
+            })
 
             bmiSubmit.addEventListener("click", (e) => {
-              e.preventDefault();
+              e.preventDefault()
               //metric validation
               if (metric.checked) {
                 if (!metricHeight.value || !metricWeight.value) {
-                  errorAlert.innerHTML = `Error: Empty input field(s)`;
-                  showAndFade(2000);
-                  return;
+                  errorAlert.innerHTML = `Error: Empty input field(s)`
+                  showAndFade(2000)
+                  return
                 }
                 if (metricHeight.value < 0 || metricWeight.value < 0) {
-                  errorAlert.innerHTML = `Error: Input cannot be negative`;
-                  showAndFade(2000);
-                  return;
+                  errorAlert.innerHTML = `Error: Input cannot be negative`
+                  showAndFade(2000)
+                  return
                 }
                 //calculation
                 let bmiTemp =
-                  metricWeight.value /
-                  (metricHeight.value * metricHeight.value);
-                let bmi = bmiTemp.toFixed(1);
+                  metricWeight.value / (metricHeight.value * metricHeight.value)
+                let bmi = bmiTemp.toFixed(1)
                 //push current value of bmi into the array that goes into the local storage
-                bmiArr.push(bmi);
+                bmiArr.push(bmi)
                 //store BMI result in local storage
-                localStorage.setItem("bmiArray", JSON.stringify(bmiArr));
+                localStorage.setItem("bmiArray", JSON.stringify(bmiArr))
 
                 if (bmiTemp < 18.5) {
-                  errorAlert.innerHTML = `BMI is ${bmi}. Underweight`;
-                  showAndFade(5000);
-                  return;
+                  errorAlert.innerHTML = `BMI is ${bmi}. Underweight`
+                  showAndFade(5000)
+                  return
                 } else if (bmiTemp < 24.9) {
-                  errorAlert.innerHTML = `BMI is ${bmi}. Normal`;
-                  showAndFade(5000);
-                  return;
+                  errorAlert.innerHTML = `BMI is ${bmi}. Normal`
+                  showAndFade(5000)
+                  return
                 } else if (bmiTemp < 29.9) {
-                  errorAlert.innerHTML = `BMI is ${bmi}. Overweight`;
-                  showAndFade(5000);
-                  return;
+                  errorAlert.innerHTML = `BMI is ${bmi}. Overweight`
+                  showAndFade(5000)
+                  return
                 } else {
-                  errorAlert.innerHTML = `BMI is ${bmi}. Obese`;
-                  showAndFade(5000);
-                  return;
+                  errorAlert.innerHTML = `BMI is ${bmi}. Obese`
+                  showAndFade(5000)
+                  return
                 }
               } //imperial validation
               if (imperial.checked) {
                 if (!imperialHeight.value || !imperialWeight.value) {
-                  errorAlert.innerHTML = `Error: Empty input field(s)`;
-                  showAndFade(2000);
-                  return;
+                  errorAlert.innerHTML = `Error: Empty input field(s)`
+                  showAndFade(2000)
+                  return
                 }
                 if (imperialHeight.value < 0 || imperialWeight.value < 0) {
-                  errorAlert.innerHTML = `Error: Input cannot be negative`;
-                  showAndFade(2000);
-                  return;
+                  errorAlert.innerHTML = `Error: Input cannot be negative`
+                  showAndFade(2000)
+                  return
                 }
                 let bmiTemp =
                   (703 * imperialWeight.value) /
-                  (144 * imperialHeight.value * imperialHeight.value);
-                let bmi = bmiTemp.toFixed(1);
+                  (144 * imperialHeight.value * imperialHeight.value)
+                let bmi = bmiTemp.toFixed(1)
 
                 //push current value of bmi into the array that goes into the local storage
-                bmiArr.push(bmi);
+                bmiArr.push(bmi)
                 //store BMI result in local storage
-                localStorage.setItem("bmiArray", JSON.stringify(bmiArr));
+                localStorage.setItem("bmiArray", JSON.stringify(bmiArr))
 
                 if (bmiTemp < 18.5) {
-                  errorAlert.innerHTML = `BMI is ${bmi}. Underweight`;
-                  showAndFade(5000);
-                  return;
+                  errorAlert.innerHTML = `BMI is ${bmi}. Underweight`
+                  showAndFade(5000)
+                  return
                 } else if (bmiTemp < 24.9) {
-                  errorAlert.innerHTML = `BMI is ${bmi}. Normal`;
-                  showAndFade(5000);
-                  return;
+                  errorAlert.innerHTML = `BMI is ${bmi}. Normal`
+                  showAndFade(5000)
+                  return
                 } else if (bmiTemp < 29.9) {
-                  errorAlert.innerHTML = `BMI is ${bmi}. Overweight`;
-                  showAndFade(5000);
-                  return;
+                  errorAlert.innerHTML = `BMI is ${bmi}. Overweight`
+                  showAndFade(5000)
+                  return
                 } else {
-                  errorAlert.innerHTML = `BMI is ${bmi}. Obese`;
-                  showAndFade(5000);
-                  return;
+                  errorAlert.innerHTML = `BMI is ${bmi}. Obese`
+                  showAndFade(5000)
+                  return
                 }
               }
-            });
+            })
           </script>
         </div>
       </section>
@@ -351,38 +350,33 @@
 
   <section id="weight-cards">
     <div class="container">
-      <div class="card-columns mobile-card-column">
+      <div class="my-card-flex">
         <%foundUserReverse.weights.forEach(mass => { %>
         <li style="list-style-type: none;">
-          <div class="card weight-card text-white mb-3">
-            <div class="card-body">
-              <h4 class="card-title"><%=mass.weight%> kg</h4>
-              <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+          <div class="weight-card mb-3">
+            <h4 class="my-card-title"><%=mass.weight%> kg</h4>
+            <div class="other-weight-data">
               <p class="my-card-data">Date: <%=mass.userDate%></p>
               <p class="my-card-data">Time: <%=mass.time%></p>
               <p class="my-card-data">BMI: <%=mass.bmi%></p>
-
-              <div class="row justify-content-center edit-and-delete">
-                <div class="col-12">
-                  <form
-                    action="/user/dashboard/<%=mass._id%>/edit"
-                    method="GET"
-                  >
-                    <button type="submit" class="btn btn-warning">
-                      Edit
-                    </button>
-                  </form>
-                </div>
-                <div class="col-12">
-                  <form
-                    action="/user/dashboard/<%=mass._id%>?_method=DELETE"
-                    method="POST"
-                  >
-                    <button type="submit" class="btn btn-danger">
-                      Delete
-                    </button>
-                  </form>
-                </div>
+            </div>
+            <div class="edit-and-delete">
+              <div class="">
+                <form action="/user/dashboard/<%=mass._id%>/edit" method="GET">
+                  <button type="submit" class="btn btn-warning">
+                    Edit
+                  </button>
+                </form>
+              </div>
+              <div class="">
+                <form
+                  action="/user/dashboard/<%=mass._id%>?_method=DELETE"
+                  method="POST"
+                >
+                  <button type="submit" class="btn btn-danger">
+                    Delete
+                  </button>
+                </form>
               </div>
             </div>
           </div>
