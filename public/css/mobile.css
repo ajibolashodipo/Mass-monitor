@@ -22,10 +22,9 @@
 }
 
 .graph-container {
-  width: 95%;
+  width: 97%;
   height: 40vh !important;
-  margin-bottom: 7.5%;
-  margin-top: 7.5%;
+  margin: 7.5% auto;
 }
 
 .bmi-label {
