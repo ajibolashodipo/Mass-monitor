@@ -11,8 +11,8 @@ const MongoStore = require("connect-mongo")(session);
 const app = express();
 require("dotenv").config();
 
-const url = process.env.DATABASEURL;
-const port = process.env.PORT || 8080;
+const url = process.env.DATABASE_URL
+const port = process.env.DATABASE_PORT || 8040;
 
 mongoose
   .connect(url, {
@@ -68,3 +68,4 @@ app.use("/user", userRoute);
 app.listen(port, () => {
   console.log(`Server ti bere lori port ${port}`);
 });
+

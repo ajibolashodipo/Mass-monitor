@@ -2,17 +2,21 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Spartan", sans-serif;
+  font-family: "Source Code Pro", monospace;
+  /* font-family: "Lora", serif; */
 }
+
 html {
   height: 100vh;
 }
+
 body {
   height: 100vh;
   display: flex;
   flex-direction: column;
   background: linear-gradient(rgba(0, 0, 0, 0.07), rgba(0, 0, 0, 0.07));
 }
+
 .all-content {
   flex: 1 0 auto;
 }
@@ -22,6 +26,7 @@ body {
   margin: 1.5% auto;
   padding: 1%;
 }
+
 .graph-container {
   width: 100%;
   margin-bottom: 4%;
@@ -47,6 +52,7 @@ body {
 .bmi-container h6 {
   margin-bottom: 5.5%;
 }
+
 .bmi-container input {
   font-size: 0.9rem;
 }
@@ -54,20 +60,26 @@ body {
 .form-container {
   width: 40%;
   margin: auto;
-  background-color: #00f5a3;
+  background-color: #86f5d0;
   padding: 2.5%;
   text-align: center;
-  border-top-left-radius: 70px;
-  border-bottom-right-radius: 70px;
+  border-top-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+}
+
+.form-control {
+  margin: 1rem 0;
 }
 
 .form-container h5 {
   margin-bottom: 3%;
 }
+
 .form-container input,
 .form-container label {
   font-size: 0.8rem;
 }
+
 .form-container button {
   font-size: 0.9rem;
 }
@@ -76,6 +88,7 @@ body {
   margin: auto;
   text-align: center;
 }
+
 .create-record-container button {
   width: 50%;
   padding: 1.2%;
@@ -94,6 +107,7 @@ body {
   display: flex;
   justify-content: space-evenly;
 }
+
 .edit-and-delete button {
   margin: 1.5% auto;
   font-size: 0.8rem;
@@ -115,10 +129,12 @@ body {
 .left-content a {
   margin-top: 2.5%;
 }
+
 .left-content p {
   letter-spacing: 0.05rem;
   line-height: 2rem;
 }
+
 .left-content .landing-button {
   width: 50%;
   padding: 2%;
@@ -138,6 +154,7 @@ body {
   flex-flow: row wrap;
   justify-content: space-evenly;
 }
+
 .weight-card {
   width: 300px;
   padding: 10px;
@@ -161,6 +178,7 @@ body {
   background-color: #eceff1;
   border-radius: 10px;
 }
+
 .other-weight-data:hover {
   transform: scale(1.1);
   opacity: 0.7;
@@ -173,37 +191,44 @@ body {
   height: 9vh;
   flex-shrink: 0;
 }
+
 .real-footer-section {
   display: flex;
   justify-content: space-around;
   align-items: center;
   height: 8vh;
 }
+
 .real-footer-section h3 {
   font-weight: 100;
   font-size: 1rem;
   color: #fff;
   margin: 0;
 }
+
 .real-footer-section .fab {
   font-size: 1.2rem;
   color: #fff;
 }
+
 .real-footer-section .fab:hover {
   color: turquoise;
   transform: rotate(20deg);
 }
+
 .real-footer-section ul {
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
+
 .real-footer-section ul li {
   list-style: none;
   text-decoration: none;
   margin-right: 50%;
   margin-top: 40%;
 }
+
 .real-footer-section ul li a {
   padding: 7.5%;
   align-self: center;
